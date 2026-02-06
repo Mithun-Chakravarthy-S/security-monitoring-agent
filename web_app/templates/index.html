@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Security Monitoring Agent</title>
+</head>
+<body>
+
+<h2>Threat Detection Dashboard</h2>
+
+<textarea id="log" rows="6" cols="60"
+placeholder="Paste a log here..."></textarea>
+<br><br>
+
+<button onclick="analyze()">Analyze</button>
+
+<pre id="output"></pre>
+
+<script>
+function analyze() {
+  fetch("/analyze", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      log: document.getElementById("log").value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("output").innerText =
+      JSON.stringify(data, null, 2);
+  });
+}
+</script>
+
+</body>
+</html>

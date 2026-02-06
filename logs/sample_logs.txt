@@ -1,0 +1,8 @@
+INFO User admin logged in from 192.168.1.10
+INFO User admin logged in from 192.168.1.10
+WARNING Failed login for user root from 45.33.12.90
+WARNING Failed login for user root from 45.33.12.90
+WARNING Failed login for user root from 45.33.12.90
+ERROR Multiple failed login attempts detected from 45.33.12.90
+INFO File accessed: /etc/passwd
+WARNING Suspicious IP detected: 103.21.244.0
