@@ -1,36 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Security Monitoring Agent</title>
+    <meta charset="UTF-8">
+    <title>Security Monitoring Agent</title>
+
+    <!-- Cybersecurity Theme CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+    <div class="container">
+        <h2>Threat Detection Dashboard</h2>
 
-<h2>Threat Detection Dashboard</h2>
+        <textarea
+            id="log"
+            rows="6"
+            placeholder="Paste a security log here..."
+        ></textarea>
 
-<textarea id="log" rows="6" cols="60"
-placeholder="Paste a log here..."></textarea>
-<br><br>
+        <button onclick="analyze()">Analyze</button>
 
-<button onclick="analyze()">Analyze</button>
+        <pre id="output"></pre>
+    </div>
 
-<pre id="output"></pre>
-
-<script>
-function analyze() {
-  fetch("/analyze", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      log: document.getElementById("log").value
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    document.getElementById("output").innerText =
-      JSON.stringify(data, null, 2);
-  });
-}
-</script>
-
+    <script>
+        function analyze() {
+            fetch("/analyze", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    log: document.getElementById("log").value
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText =
+                    JSON.stringify(data, null, 2);
+            });
+        }
+    </script>
 </body>
 </html>
